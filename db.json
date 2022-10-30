@@ -1,0 +1,49 @@
+{
+	"users": [
+		{
+			"id": "lol",
+			"name": "Mackan"
+		},
+		{
+			"id": "24033145-9c07-44c6-ae99-6b862748dbcd",
+			"name": "ulrika"
+		}
+	],
+	"projects": [
+		{
+			"id": "lel",
+			"userId": "24033145-9c07-44c6-ae99-6b862748dbcd",
+			"name": "Projekt nr 1",
+			"color": "#4E0E9F"
+		},
+		{
+			"id": "e",
+			"userId": "lol",
+			"name": "Mackeking",
+			"color": "#4E0E9F"
+		}
+	],
+	"tasks": [
+		{
+			"id": "mimimi",
+			"userId": "lol",
+			"projectId": "e",
+			"title": "Tror fan att det funkar :D"
+		},
+		{
+			"id": "taskis",
+			"userId": "24033145-9c07-44c6-ae99-6b862748dbcd",
+			"projectId": "lel",
+			"title": "Läsa genom Reacts nya dokumentation"
+		}
+	],
+	"timelogs": [
+		{
+			"id": "<random id>",
+			"userId": "lol",
+			"taskId": "<task id>",
+			"start": "2022-10-12T10:49:33.081Z",
+			"end": "2022-10-12T10:49:33.081Z"
+		}
+	]
+}
