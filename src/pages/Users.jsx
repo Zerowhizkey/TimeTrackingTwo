@@ -15,9 +15,9 @@ const Users = () => {
 		await addUser(userData);
 	};
 
-	const handleDeleteUser = async (id) => {
-		await deleteUser(id);
-	};
+	// const handleDeleteUser = async (id) => {
+	// 	await deleteUser(id);
+	// };
 
 	const handleUser = (e) => {
 		setCurrentUser(e.target.value);
@@ -37,7 +37,7 @@ const Users = () => {
 								checked={user.id === currentUser}
 							/>
 							{user.name}
-							<button onClick={() => handleDeleteUser(user.id)}>X</button>
+							<button onClick={() => deleteUser(user.id)}>X</button>
 						</li>
 					</ul>
 				))

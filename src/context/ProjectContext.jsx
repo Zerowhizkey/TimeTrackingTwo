@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import api from "../api/api";
 
 export const ProjectContex = createContext();
@@ -9,9 +9,11 @@ export const ProjectProvider = ({ children }) => {
 	const [tasks, setTasks] = useState([]);
 	const [timeLogs, setTimeLogs] = useState([]);
 	const [currentUser, setCurrentUser] = useState([]);
+	const [currentProject, setCurrentProject] = useState([]);
 
 	// console.log(currentUser, "currentUser");
 	// console.log(projects, "Projects");
+	// console.log(tasks, "Tasks");
 
 	const getUser = async () => {
 		const data = await api.users.get();
@@ -30,33 +32,79 @@ export const ProjectProvider = ({ children }) => {
 	};
 
 	const getProject = async () => {
-		if (currentUser) {
-			const data = await api.projects.get();
-			setProjects(data);
-		}
+		const data = await api.projects.get();
+		const filtProject = data.filter(
+			(project) => project.userId === currentUser
+		);
+		setProjects(filtProject);
 	};
+
+	const addProject = async (projectData) => {
+		await api.projects.post(projectData);
+		getProject();
+	};
+
+	const deleteProject = async (id) => {
+		const deleted = await api.projects.delete(id);
+		console.log(deleted);
+		getProject();
+	};
+
 	const getTask = async () => {
-		if (currentUser) {
-			const data = await api.tasks.get();
-			setTasks(data);
-		}
+		const data = await api.tasks.get();
+		const filtTask = data.filter((task) => task.projectId === currentProject);
+		setTasks(filtTask);
 	};
+
+	// const value = useMemo(() => {
+	// 	setCurrentUser,
+	// 		currentUser,
+	// 		users,
+	// 		addUser,
+	// 		deleteUser,
+	// 		currentProject,
+	// 		setCurrentProject,
+	// 		projects,
+	// 		addProject,
+	// 		deleteProject,
+	// 		tasks;
+	// }, [
+	// 	setCurrentUser,
+	// 	currentUser,
+	// 	users,
+	// 	addUser,
+	// 	deleteUser,
+	// 	currentProject,
+	// 	setCurrentProject,
+	// 	projects,
+	// 	addProject,
+	// 	deleteProject,
+	// 	tasks,
+	// ]);
 
 	useEffect(() => {
 		getUser();
-		getProject();
-		getTask();
-	}, []);
+		if (currentUser.length !== 0) {
+			getProject();
+		}
+		if (currentProject.length !== 0) {
+			getTask();
+		}
+	}, [currentUser, currentProject]);
 
 	return (
 		<ProjectContex.Provider
 			value={{
+				setCurrentUser,
+				currentUser,
 				users,
 				addUser,
 				deleteUser,
-				setCurrentUser,
-				currentUser,
+				currentProject,
+				setCurrentProject,
 				projects,
+				addProject,
+				deleteProject,
 				tasks,
 			}}
 		>
@@ -73,9 +121,6 @@ export const useProjects = () => {
 	return context;
 };
 
-// const filtProject = data
-// .filter((project) => project.userId === currentUser)
-// .map((project) => project);
 // const filtProject = projects
 // 		.filter((project) => project.userId === currentUser)
 // 		.map((project) => project);
