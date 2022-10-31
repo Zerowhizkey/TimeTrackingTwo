@@ -10,6 +10,7 @@ export const ProjectProvider = ({ children }) => {
 	const [timeLogs, setTimeLogs] = useState([]);
 	const [currentUser, setCurrentUser] = useState([]);
 	const [currentProject, setCurrentProject] = useState([]);
+	const [currentTask, setCurrentTask] = useState([]);
 
 	// console.log(currentUser, "currentUser");
 	// console.log(projects, "Projects");
@@ -56,31 +57,16 @@ export const ProjectProvider = ({ children }) => {
 		setTasks(filtTask);
 	};
 
-	// const value = useMemo(() => {
-	// 	setCurrentUser,
-	// 		currentUser,
-	// 		users,
-	// 		addUser,
-	// 		deleteUser,
-	// 		currentProject,
-	// 		setCurrentProject,
-	// 		projects,
-	// 		addProject,
-	// 		deleteProject,
-	// 		tasks;
-	// }, [
-	// 	setCurrentUser,
-	// 	currentUser,
-	// 	users,
-	// 	addUser,
-	// 	deleteUser,
-	// 	currentProject,
-	// 	setCurrentProject,
-	// 	projects,
-	// 	addProject,
-	// 	deleteProject,
-	// 	tasks,
-	// ]);
+	const addTask = async (taskData) => {
+		await api.tasks.post(taskData);
+		getTask();
+	};
+
+	const deleteTask = async (id) => {
+		const deleted = await api.tasks.delete(id);
+		console.log(deleted);
+		getTask();
+	};
 
 	useEffect(() => {
 		getUser();
@@ -106,6 +92,10 @@ export const ProjectProvider = ({ children }) => {
 				addProject,
 				deleteProject,
 				tasks,
+				addTask,
+				deleteTask,
+				currentTask,
+				setCurrentTask,
 			}}
 		>
 			{children}
@@ -124,3 +114,28 @@ export const useProjects = () => {
 // const filtProject = projects
 // 		.filter((project) => project.userId === currentUser)
 // 		.map((project) => project);
+// const value = useMemo(() => {
+// 	setCurrentUser,
+// 		currentUser,
+// 		users,
+// 		addUser,
+// 		deleteUser,
+// 		currentProject,
+// 		setCurrentProject,
+// 		projects,
+// 		addProject,
+// 		deleteProject,
+// 		tasks;
+// }, [
+// 	setCurrentUser,
+// 	currentUser,
+// 	users,
+// 	addUser,
+// 	deleteUser,
+// 	currentProject,
+// 	setCurrentProject,
+// 	projects,
+// 	addProject,
+// 	deleteProject,
+// 	tasks,
+// ]);

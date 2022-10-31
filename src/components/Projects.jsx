@@ -29,12 +29,6 @@ const Projects = () => {
 		setCurrentProject(e.target.value);
 	};
 
-	const filtProjects = projects
-		.filter((project) => project.userId === currentUser)
-		.map((project) => project);
-	// console.log(name);
-	// console.log(color);
-	// console.log(currentProject);
 	return (
 		<div>
 			<h6>Projects</h6>

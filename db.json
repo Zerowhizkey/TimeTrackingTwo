@@ -1,35 +1,6 @@
 {
-	"users": [
-		{
-			"id": "93abc8f7-5a52-4c5d-9341-6c22235ac54a",
-			"name": "Marcus"
-		},
-		{
-			"id": "fbafb292-140c-4d6d-87a5-6015cddb3264",
-			"name": "Ulrika"
-		}
-	],
-	"projects": [
-		{
-			"id": "a3a58898-5dbf-4976-859f-c4e119fb6794",
-			"userId": "93abc8f7-5a52-4c5d-9341-6c22235ac54a",
-			"name": "Remake school assignment",
-			"color": "#de0d0d"
-		},
-		{
-			"id": "85697daa-c742-486b-ad4c-cb224501daf8",
-			"userId": "fbafb292-140c-4d6d-87a5-6015cddb3264",
-			"name": "Do something",
-			"color": "#f8f120"
-		}
-	],
-	"tasks": [
-		{
-			"id": "<random id>",
-			"userId": "93abc8f7-5a52-4c5d-9341-6c22235ac54a",
-			"projectId": "a3a58898-5dbf-4976-859f-c4e119fb6794",
-			"title": "Läsa genom Reacts nya dokumentation"
-		}
-	],
-	"timelogs": []
+  "users": [],
+  "projects": [],
+  "tasks": [],
+  "timelogs": []
 }
