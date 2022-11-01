@@ -5,7 +5,7 @@ import "./App.css";
 import { ProjectProvider } from "./context/ProjectContext";
 import Overview from "./pages/Overview";
 import Calendar from "./pages/Calendar";
-import Timer from "./pages/Timer";
+import Timers from "./pages/Timers";
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
 				element: <Calendar />,
 			},
 			{
-				path: "timer",
-				element: <Timer />,
+				path: "timers",
+				element: <Timers />,
 			},
 		],
 	},

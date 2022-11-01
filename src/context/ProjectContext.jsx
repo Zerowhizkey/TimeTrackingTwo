@@ -7,14 +7,11 @@ export const ProjectProvider = ({ children }) => {
 	const [users, setUsers] = useState([]);
 	const [projects, setProjects] = useState([]);
 	const [tasks, setTasks] = useState([]);
-	const [timeLogs, setTimeLogs] = useState([]);
+	const [times, setTimes] = useState([]);
 	const [currentUser, setCurrentUser] = useState([]);
 	const [currentProject, setCurrentProject] = useState([]);
 	const [currentTask, setCurrentTask] = useState([]);
-
-	// console.log(currentUser, "currentUser");
-	// console.log(projects, "Projects");
-	// console.log(tasks, "Tasks");
+	const [currentTime, setCurrentTime] = useState([]);
 
 	const getUser = async () => {
 		const data = await api.users.get();
@@ -28,7 +25,7 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteUser = async (id) => {
 		const deleted = await api.users.delete(id);
-		console.log(deleted);
+		// console.log(deleted);
 		getUser();
 	};
 
@@ -47,7 +44,7 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteProject = async (id) => {
 		const deleted = await api.projects.delete(id);
-		console.log(deleted);
+		// console.log(deleted);
 		getProject();
 	};
 
@@ -64,8 +61,30 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteTask = async (id) => {
 		const deleted = await api.tasks.delete(id);
-		console.log(deleted);
+		// console.log(deleted);
 		getTask();
+	};
+
+	const getTime = async () => {
+		const data = await api.timelogs.get();
+		const filtTime = data.filter((time) => time.taskId === currentTask);
+		setTimes(filtTime);
+	};
+
+	const addTime = async (timeData) => {
+		await api.timelogs.post(timeData);
+		getTime();
+	};
+
+	const deleteTime = async (id) => {
+		const deleted = await api.timelogs.delete(id);
+		// console.log(deleted);
+		getTime();
+	};
+
+	const updateTime = async (id, timeData) => {
+		await api.timelogs.patch(id, timeData);
+		getTime();
 	};
 
 	useEffect(() => {
@@ -76,7 +95,10 @@ export const ProjectProvider = ({ children }) => {
 		if (currentProject.length !== 0) {
 			getTask();
 		}
-	}, [currentUser, currentProject]);
+		if (currentTask.length !== 0) {
+			getTime();
+		}
+	}, [currentUser, currentProject, currentTask]);
 
 	return (
 		<ProjectContex.Provider
@@ -86,16 +108,22 @@ export const ProjectProvider = ({ children }) => {
 				users,
 				addUser,
 				deleteUser,
-				currentProject,
 				setCurrentProject,
+				currentProject,
 				projects,
 				addProject,
 				deleteProject,
+				setCurrentTask,
+				currentTask,
 				tasks,
 				addTask,
 				deleteTask,
-				currentTask,
-				setCurrentTask,
+				setCurrentTime,
+				currentTime,
+				times,
+				addTime,
+				deleteTime,
+				updateTime,
 			}}
 		>
 			{children}
@@ -110,32 +138,3 @@ export const useProjects = () => {
 	}
 	return context;
 };
-
-// const filtProject = projects
-// 		.filter((project) => project.userId === currentUser)
-// 		.map((project) => project);
-// const value = useMemo(() => {
-// 	setCurrentUser,
-// 		currentUser,
-// 		users,
-// 		addUser,
-// 		deleteUser,
-// 		currentProject,
-// 		setCurrentProject,
-// 		projects,
-// 		addProject,
-// 		deleteProject,
-// 		tasks;
-// }, [
-// 	setCurrentUser,
-// 	currentUser,
-// 	users,
-// 	addUser,
-// 	deleteUser,
-// 	currentProject,
-// 	setCurrentProject,
-// 	projects,
-// 	addProject,
-// 	deleteProject,
-// 	tasks,
-// ]);

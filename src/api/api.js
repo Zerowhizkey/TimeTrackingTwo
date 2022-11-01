@@ -21,8 +21,8 @@ const createApiHandler = (route) => {
 			const response = await axios.post(URL, data);
 			return response.data;
 		},
-		async patch(data) {
-			const response = await axios.patch(URL, data);
+		async patch(id, data) {
+			const response = await axios.patch(`${URL}/${id}`, data);
 			return response.data;
 		},
 		async delete(id) {

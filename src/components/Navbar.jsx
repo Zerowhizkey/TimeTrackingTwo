@@ -6,7 +6,7 @@ const Navbar = () => {
 		<div>
 			<NavLink to={"overview"}>Overview</NavLink>
 			<NavLink to={"calendar"}>Calendar</NavLink>
-			<NavLink to={"timer"}>Timer</NavLink>
+			<NavLink to={"timers"}>Timers</NavLink>
 		</div>
 	);
 };

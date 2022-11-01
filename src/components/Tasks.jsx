@@ -38,7 +38,7 @@ const Tasks = () => {
 								type="radio"
 								value={task.id}
 								onChange={handleTask}
-								checked={task.id === currentProject}
+								checked={task.id === currentTask}
 							/>
 							{task.title}
 							<button onClick={() => deleteTask(task.id)}>X</button>
@@ -49,7 +49,7 @@ const Tasks = () => {
 				<p>No tasks</p>
 			)}
 			<div>
-				<p>Add a project</p>
+				<p>Add a task</p>
 				<input
 					type="text"
 					// value={name}

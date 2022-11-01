@@ -1,6 +1,34 @@
 {
-  "users": [],
-  "projects": [],
-  "tasks": [],
-  "timelogs": []
+  "users": [
+    {
+      "id": "032dce56-54b0-4a09-a877-6db92f60f168",
+      "name": "asd"
+    }
+  ],
+  "projects": [
+    {
+      "id": "ba5c6b7f-8a1d-415d-9b1f-989951fd4380",
+      "userId": "032dce56-54b0-4a09-a877-6db92f60f168",
+      "name": "dd",
+      "color": "#e10909"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "8fbef99c-1e8c-4c81-9220-42e8d2c10907",
+      "userId": "032dce56-54b0-4a09-a877-6db92f60f168",
+      "projectId": "ba5c6b7f-8a1d-415d-9b1f-989951fd4380",
+      "title": "s"
+    }
+  ],
+  "timelogs": [
+    {
+      "id": "90dc092d-26ac-439c-9989-fa5e74fe7648",
+      "userId": "032dce56-54b0-4a09-a877-6db92f60f168",
+      "projectId": "ba5c6b7f-8a1d-415d-9b1f-989951fd4380",
+      "taskId": "8fbef99c-1e8c-4c81-9220-42e8d2c10907",
+      "timerStart": 1667331317803,
+      "timerStop": 1667331323276
+    }
+  ]
 }
