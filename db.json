@@ -3,6 +3,10 @@
     {
       "id": "032dce56-54b0-4a09-a877-6db92f60f168",
       "name": "asd"
+    },
+    {
+      "id": "6beffc60-841a-4030-a16e-10df8480ff21",
+      "name": ""
     }
   ],
   "projects": [
@@ -11,6 +15,18 @@
       "userId": "032dce56-54b0-4a09-a877-6db92f60f168",
       "name": "dd",
       "color": "#e10909"
+    },
+    {
+      "id": "7f2c8a5b-05d4-4049-8cad-3a477ad6055b",
+      "userId": [],
+      "name": "lolol",
+      "color": ""
+    },
+    {
+      "id": "d61660d0-5e41-4c95-82d9-78149bf82437",
+      "userId": [],
+      "name": "lolol",
+      "color": ""
     }
   ],
   "tasks": [
