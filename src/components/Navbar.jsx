@@ -1,13 +1,27 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Box } from "@chakra-ui/react";
 const Navbar = () => {
 	return (
-		<div>
-			<NavLink to={"overview"}>Overview</NavLink>
-			<NavLink to={"calendar"}>Calendar</NavLink>
-			<NavLink to={"timers"}>Timers</NavLink>
-		</div>
+		<Box left="0" bottom="0" position="fixed">
+			<Breadcrumb>
+				<BreadcrumbItem>
+					<BreadcrumbLink as={Link} to="overview">
+						Overview
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+				<BreadcrumbItem>
+					<BreadcrumbLink as={Link} to="calendar">
+						Calendar
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+				<BreadcrumbItem isCurrentPage>
+					<BreadcrumbLink as={Link} to="timers">
+						Timer
+					</BreadcrumbLink>
+				</BreadcrumbItem>
+			</Breadcrumb>
+		</Box>
 	);
 };
 

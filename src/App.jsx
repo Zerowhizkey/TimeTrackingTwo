@@ -1,16 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "../src/pages/Root";
 import Users from "../src/pages/Users";
-import "./App.css";
 import { ProjectProvider } from "./context/ProjectContext";
 import Overview from "./pages/Overview";
 import Calendar from "./pages/Calendar";
 import Timers from "./pages/Timers";
 
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
 const router = createBrowserRouter([
 	{
 		path: "/",
