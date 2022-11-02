@@ -1,42 +1,6 @@
 {
-  "users": [
-    {
-      "id": "ff151100-222a-4867-87d2-b462773c18a5",
-      "name": "haha"
-    }
-  ],
-  "projects": [
-    {
-      "id": "b2314fb8-1b03-4452-9658-486fcda275bd",
-      "userId": "ff151100-222a-4867-87d2-b462773c18a5",
-      "name": "hehe",
-      "color": "#cb1515"
-    }
-  ],
-  "tasks": [
-    {
-      "id": "2e2c69f0-0486-4c7a-b6b9-1f0ac659c5dc",
-      "userId": "ff151100-222a-4867-87d2-b462773c18a5",
-      "projectId": "b2314fb8-1b03-4452-9658-486fcda275bd",
-      "title": "huhu"
-    }
-  ],
-  "timelogs": [
-    {
-      "id": "e455cf9b-5c46-4cff-9d11-c7613a54b11f",
-      "userId": "ff151100-222a-4867-87d2-b462773c18a5",
-      "projectId": "b2314fb8-1b03-4452-9658-486fcda275bd",
-      "taskId": "2e2c69f0-0486-4c7a-b6b9-1f0ac659c5dc",
-      "timerStart": 1667337031325,
-      "timerStop": 1667337032605
-    },
-    {
-      "id": "d361b966-eb40-4376-aa34-d7a061ae797e",
-      "userId": "ff151100-222a-4867-87d2-b462773c18a5",
-      "projectId": "b2314fb8-1b03-4452-9658-486fcda275bd",
-      "taskId": "2e2c69f0-0486-4c7a-b6b9-1f0ac659c5dc",
-      "timerStart": 1667373754090,
-      "timerStop": 1667373755664
-    }
-  ]
+  "users": [],
+  "projects": [],
+  "tasks": [],
+  "timelogs": []
 }

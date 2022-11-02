@@ -25,8 +25,11 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteUser = async (id) => {
 		const deleted = await api.users.delete(id);
-		// console.log(deleted);
+		if (!deleted) return;
 		getUser();
+		getProject();
+		getTask();
+		getTime();
 	};
 
 	const getProject = async () => {
@@ -44,8 +47,10 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteProject = async (id) => {
 		const deleted = await api.projects.delete(id);
-		// console.log(deleted);
+		if (!deleted) return;
 		getProject();
+		getTask();
+		getTime();
 	};
 
 	const getTask = async () => {
@@ -61,8 +66,9 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteTask = async (id) => {
 		const deleted = await api.tasks.delete(id);
-		// console.log(deleted);
+		if (!deleted) return;
 		getTask();
+		getTime();
 	};
 
 	const getTime = async () => {
@@ -78,7 +84,7 @@ export const ProjectProvider = ({ children }) => {
 
 	const deleteTime = async (id) => {
 		const deleted = await api.timelogs.delete(id);
-		// console.log(deleted);
+		if (!deleted) return;
 		getTime();
 	};
 
@@ -89,13 +95,13 @@ export const ProjectProvider = ({ children }) => {
 
 	useEffect(() => {
 		getUser();
-		if (currentUser.length !== 0) {
+		if (!currentUser) {
 			getProject();
 		}
-		if (currentProject.length !== 0) {
+		if (!currentProject) {
 			getTask();
 		}
-		if (currentTask.length !== 0) {
+		if (!currentTask) {
 			getTime();
 		}
 	}, [currentUser, currentProject, currentTask]);
