@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const Users = () => {
 	const [name, setName] = useState("");
-	const { users, addUser, deleteUser, setCurrentUser, currentUser } =
+	const { users, addUser, deleteUser, dispatchCurrent, current } =
 		useProjects();
 
 	const handleAddUser = async () => {
@@ -15,12 +15,8 @@ const Users = () => {
 		await addUser(userData);
 	};
 
-	// const handleDeleteUser = async (id) => {
-	// 	await deleteUser(id);
-	// };
-
 	const handleUser = (e) => {
-		setCurrentUser(e.target.value);
+		dispatchCurrent({ id: e.target.value, type: "user" });
 	};
 
 	return (
@@ -34,7 +30,7 @@ const Users = () => {
 								type="radio"
 								value={user.id}
 								onChange={handleUser}
-								checked={user.id === currentUser}
+								checked={user.id === current.user}
 							/>
 							{user.name}
 							<button onClick={() => deleteUser(user.id)}>X</button>

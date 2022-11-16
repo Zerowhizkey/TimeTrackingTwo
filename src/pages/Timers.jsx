@@ -14,12 +14,8 @@ dayjs.extend(duration);
 const Timers = () => {
 	const [logTime, setLogTime] = useState(0);
 	const {
-		currentUser,
-		currentProject,
-		currentTask,
-		setCurrentTask,
-		currentTime,
-		setCurrentTime,
+		current,
+		dispatchCurrent,
 		tasks,
 		times,
 		addTime,
@@ -30,35 +26,35 @@ const Timers = () => {
 	const timer = useRef(new Timer());
 	const intervalRef = useRef();
 
-	const activeTask = tasks.find((task) => task.id === currentTask);
+	const activeTask = tasks.find((task) => task.id === current.task);
 	const badTime = times.find((time) => time.timerStop === 0);
 
 	const handleClickAdd = async () => {
 		const timeData = {
 			id: uuid(),
-			userId: currentUser,
-			projectId: currentProject,
-			taskId: currentTask,
+			userId: current.user,
+			projectId: current.project,
+			taskId: current.task,
 			timerStart: Date.now(),
 			timerStop: 0,
 		};
 		await addTime(timeData);
 		timer.current.start();
 		startTime();
-		setCurrentTime(timeData.id);
+		dispatchCurrent({ type: "time", id: timeData.id });
 	};
 
 	const handleCurrentTask = (e) => {
 		if (badTime?.taskId === e.target.value) {
 			timer.current.start();
 			startTime();
-			setCurrentTime(badTime);
+			dispatchCurrent({ type: "time", id: badTime });
 		}
-		setCurrentTask(e.target.value);
+		dispatchCurrent({ type: "task", id: e.target.value });
 	};
 
 	const handleStop = async (timeData) => {
-		await updateTime(currentTime, timeData);
+		await updateTime(current.time, timeData);
 		stopTime();
 	};
 	// console.log(currentTime);
@@ -81,14 +77,14 @@ const Timers = () => {
 
 	const totalTime = useMemo(() => {
 		const filterdTimes = times.filter(
-			(time) => time.taskId === currentTask && time.timerStop
+			(time) => time.taskId === current.task && time.timerStop
 		);
 
 		const elapsed = filterdTimes.reduce((sum, curr) => {
 			return sum + (curr.timerStop - curr.timerStart);
 		}, 0);
 		return badTime ? elapsed + (Date.now() - badTime.timerStart) : elapsed;
-	}, [times, currentTask]);
+	}, [times, current.task]);
 
 	const showTotal = useMemo(() => {
 		return dayjs.duration(totalTime + logTime).format("HH:mm:ss");
@@ -113,7 +109,7 @@ const Timers = () => {
 								<button value={task.id} onClick={handleCurrentTask}>
 									Choose me
 								</button>
-								{currentTask === task.id ? (
+								{current.task === task.id ? (
 									<>
 										<div key={task.id}>
 											<FaPlayCircle

@@ -3,25 +3,18 @@ import { useProjects } from "../context/ProjectContext";
 import { v4 as uuid } from "uuid";
 const Tasks = () => {
 	const [title, setTitle] = useState("");
-	const {
-		tasks,
-		addTask,
-		deleteTask,
-		currentUser,
-		currentProject,
-		setCurrentTask,
-		currentTask,
-	} = useProjects();
+	const { tasks, addTask, deleteTask, current, dispatchCurrent } =
+		useProjects();
 
 	const handleTask = (e) => {
-		setCurrentTask(e.target.value);
+		dispatchCurrent({ type: "task", id: e.target.value });
 	};
 
 	const handleAddTask = async () => {
 		const taskData = {
 			id: uuid(),
-			userId: currentUser,
-			projectId: currentProject,
+			userId: current.user,
+			projectId: current.project,
 			title: title,
 		};
 		await addTask(taskData);
@@ -38,7 +31,7 @@ const Tasks = () => {
 								type="radio"
 								value={task.id}
 								onChange={handleTask}
-								checked={task.id === currentTask}
+								checked={task.id === current.task}
 							/>
 							{task.title}
 							<button onClick={() => deleteTask(task.id)}>X</button>

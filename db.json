@@ -1,6 +1,34 @@
 {
-  "users": [],
-  "projects": [],
-  "tasks": [],
-  "timelogs": []
+  "users": [
+    {
+      "id": "662943f2-c6e0-4a5e-a121-01ad57469038",
+      "name": "Marcus"
+    }
+  ],
+  "projects": [
+    {
+      "id": "dd5c1c6b-897f-4e0e-967e-e0fa8fcc28be",
+      "userId": "662943f2-c6e0-4a5e-a121-01ad57469038",
+      "name": "Invoice-dashboard",
+      "color": "#e61919"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "3a45dc5e-040d-464c-84ed-931320bf4f63",
+      "userId": "662943f2-c6e0-4a5e-a121-01ad57469038",
+      "projectId": "dd5c1c6b-897f-4e0e-967e-e0fa8fcc28be",
+      "title": "Make it work"
+    }
+  ],
+  "timelogs": [
+    {
+      "id": "e0394cec-9734-41c7-bd02-86cbced213ff",
+      "userId": "662943f2-c6e0-4a5e-a121-01ad57469038",
+      "projectId": "dd5c1c6b-897f-4e0e-967e-e0fa8fcc28be",
+      "taskId": "3a45dc5e-040d-464c-84ed-931320bf4f63",
+      "timerStart": 1668594035751,
+      "timerStop": 1668594038171
+    }
+  ]
 }

@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useReducer } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/api";
 
 export const ProjectContex = createContext();
@@ -8,10 +9,23 @@ export const ProjectProvider = ({ children }) => {
 	const [projects, setProjects] = useState([]);
 	const [tasks, setTasks] = useState([]);
 	const [times, setTimes] = useState([]);
-	const [currentUser, setCurrentUser] = useState([]);
-	const [currentProject, setCurrentProject] = useState([]);
-	const [currentTask, setCurrentTask] = useState([]);
-	const [currentTime, setCurrentTime] = useState([]);
+	// const [currentUser, setCurrentUser] = useState([]);
+	// const [currentProject, setCurrentProject] = useState([]);
+	// const [currentTask, setCurrentTask] = useState([]);
+	// const [currentTime, setCurrentTime] = useState([]);
+	const [current, dispatchCurrent] = useReducer(
+		(state, action) => {
+			const { type, id } = action;
+			if (!(type in state)) return state;
+			return { ...state, [type]: id };
+		},
+		{
+			user: null,
+			project: null,
+			task: null,
+			time: null,
+		}
+	);
 
 	const getUser = async () => {
 		const data = await api.users.get();
@@ -33,9 +47,10 @@ export const ProjectProvider = ({ children }) => {
 	};
 
 	const getProject = async () => {
+		if (!current.user) return setProjects([]);
 		const data = await api.projects.get();
 		const filtProject = data.filter(
-			(project) => project.userId === currentUser
+			(project) => project.userId === current.user
 		);
 		setProjects(filtProject);
 	};
@@ -54,8 +69,9 @@ export const ProjectProvider = ({ children }) => {
 	};
 
 	const getTask = async () => {
+		if (!current.project) return setTasks([]);
 		const data = await api.tasks.get();
-		const filtTask = data.filter((task) => task.projectId === currentProject);
+		const filtTask = data.filter((task) => task.projectId === current.project);
 		setTasks(filtTask);
 	};
 
@@ -72,8 +88,9 @@ export const ProjectProvider = ({ children }) => {
 	};
 
 	const getTime = async () => {
+		if (!current.task) return setTimes([]);
 		const data = await api.timelogs.get();
-		const filtTime = data.filter((time) => time.taskId === currentTask);
+		const filtTime = data.filter((time) => time.taskId === current.task);
 		setTimes(filtTime);
 	};
 
@@ -95,37 +112,31 @@ export const ProjectProvider = ({ children }) => {
 
 	useEffect(() => {
 		getUser();
-		if (!currentUser) {
-			getProject();
-		}
-		if (!currentProject) {
-			getTask();
-		}
-		if (!currentTask) {
-			getTime();
-		}
-	}, [currentUser, currentProject, currentTask]);
+	}, []);
+	useEffect(() => {
+		getProject();
+	}, [current.user]);
+	useEffect(() => {
+		getTask();
+	}, [current.project]);
+	useEffect(() => {
+		getTime();
+	}, [current.task]);
 
 	return (
 		<ProjectContex.Provider
 			value={{
-				setCurrentUser,
-				currentUser,
+				current,
+				dispatchCurrent,
 				users,
 				addUser,
 				deleteUser,
-				setCurrentProject,
-				currentProject,
 				projects,
 				addProject,
 				deleteProject,
-				setCurrentTask,
-				currentTask,
 				tasks,
 				addTask,
 				deleteTask,
-				setCurrentTime,
-				currentTime,
 				times,
 				addTime,
 				deleteTime,

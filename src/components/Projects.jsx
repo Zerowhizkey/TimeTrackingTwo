@@ -6,19 +6,13 @@ const Projects = () => {
 	const [name, setName] = useState("");
 	const [color, setColor] = useState("");
 
-	const {
-		currentUser,
-		projects,
-		addProject,
-		deleteProject,
-		setCurrentProject,
-		currentProject,
-	} = useProjects();
+	const { current, dispatchCurrent, projects, addProject, deleteProject } =
+		useProjects();
 
 	const handleAddProject = async () => {
 		const projectData = {
 			id: uuid(),
-			userId: currentUser,
+			userId: current.user,
 			name: name,
 			color: color,
 		};
@@ -26,7 +20,7 @@ const Projects = () => {
 	};
 
 	const handleProject = (e) => {
-		setCurrentProject(e.target.value);
+		dispatchCurrent({ type: "project", id: e.target.value });
 	};
 
 	return (
@@ -40,7 +34,7 @@ const Projects = () => {
 								type="radio"
 								value={project.id}
 								onChange={handleProject}
-								checked={project.id === currentProject}
+								checked={project.id === current.project}
 							/>
 							{project.name}
 							<button onClick={() => deleteProject(project.id)}>X</button>
