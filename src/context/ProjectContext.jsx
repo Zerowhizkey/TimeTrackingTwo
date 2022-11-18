@@ -9,10 +9,6 @@ export const ProjectProvider = ({ children }) => {
 	const [projects, setProjects] = useState([]);
 	const [tasks, setTasks] = useState([]);
 	const [times, setTimes] = useState([]);
-	// const [currentUser, setCurrentUser] = useState([]);
-	// const [currentProject, setCurrentProject] = useState([]);
-	// const [currentTask, setCurrentTask] = useState([]);
-	// const [currentTime, setCurrentTime] = useState([]);
 	const [current, dispatchCurrent] = useReducer(
 		(state, action) => {
 			const { type, id } = action;
